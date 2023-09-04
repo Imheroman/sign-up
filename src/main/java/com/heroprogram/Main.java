@@ -9,7 +9,7 @@ public class Main {
         Person hero = new Person("김영웅", "990516");
 
         naver.signUp(gun);
-//        naver.signUp(hero);
-
+        naver.findId(gun);
+        naver.findId(hero);
     }
 }

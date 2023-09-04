@@ -1,30 +1,49 @@
 package com.heroprogram;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Naver implements Website {
-    private final ArrayList<Person> people = new ArrayList<>();
+    private final ArrayList<Member> members = new ArrayList<>();
     private String address = "www.naver.com";
 
     @Override
     public void signUp(Person person) {
-        getInfo();
-        people.add(person);
+        String[] info = getInfo();
+        members.add(new Member(info[0], info[1], person));
+    }
+
+    private String[] getInfo() {
+        Scanner sc = new Scanner(System.in);
+//        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+//        StringTokenizer st = new StringTokenizer(br.readLine());
+
+        String[] info = new String[2];
+
+        System.out.print("Id를 입력하시오: ");
+        info[0] = sc.nextLine();
+//        info[0] = br.readLine();
+
+        System.out.print("Pw를 입력하시오: ");
+        info[1] = sc.nextLine();
+//        info[1] = br.readLine();
+
+        return info;
     }
 
     @Override
-    public void getInfo() {
-
-    }
-
-    public String findIdByName(Person person) {
+    public void findId(Person person) {
         String id = "";
         StringBuilder sb = new StringBuilder();
+        ArrayList<Member> members = this.getMembers();
 
-        for (int index = 0; index < people.size(); index++) {
-            Person p = people.get(index);
-            if (person.getName() == p.getName() && person.getRegistrationId() == p.getRegistrationId()) {
-                id = person.getName();
+        for (Member member : members) {
+            Person p = member.getPerson();
+
+            if (person.equals(p)) {
+//                id = person.getName();
+                id = member.getId();
+                break;
             }
         }
 
@@ -34,6 +53,10 @@ public class Naver implements Website {
             sb.append(id.substring(0, id.length() - 2)).append("**");
         }
 
-        return id;
+        System.out.println("아이디는 " + id + "입니다.");
+    }
+
+    public ArrayList<Member> getMembers() {
+        return this.members;
     }
 }

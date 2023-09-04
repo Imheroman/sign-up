@@ -4,6 +4,5 @@ public interface Website {
 
     void signUp(Person person);
 
-    void getInfo();
-
+    void findId(Person person);
 }

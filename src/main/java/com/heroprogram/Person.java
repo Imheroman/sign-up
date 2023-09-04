@@ -3,8 +3,6 @@ package com.heroprogram;
 public class Person {
     private String name;
     private String registrationId;
-    private String id;
-    private String pw;
 
     public Person(String name, String registrationId) {
         if (name.isEmpty()) {
